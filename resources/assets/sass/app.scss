@@ -1,0 +1,64 @@
+// Fonts
+//@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// Variables
+//@import "variables";
+// Bootstrap
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootstrap/scss/bootstrap";
+
+// Own classes
+
+//.header {
+//  padding-top: 8px;
+//  padding-bottom: 8px;
+//}
+
+td.nipigaz-code-column,
+td.tcm-code-column,
+td.transmittal-column,
+td.issued-at-column,
+td.revision-column,
+td.class-column,
+td.reason-column {
+  text-align: center;
+}
+
+td.english-title-column,
+td.russian-title-column {
+  text-align: left;
+}
+
+th {
+  text-align: center;
+  border:1px solid #61c4ea;
+  background-color:#7cceee;
+}
+
+td.nipigaz-code-column.input-cell,
+td.tcm-code-column.input-cell,
+td.transmittal-column.input-cell,
+td.issued-at-column.input-cell,
+td.revision-column.input-cell,
+td.class-column.input-cell,
+td.reason-column.input-cell,
+td.english-title-column.input-cell,
+td.russian-title-column.input-cell {
+  padding: 0;
+}
+
+input.input-cell {
+  width: 100%;
+}
+
+td.menu-cell {
+  width: 100px;
+}
+
+.revision-column,
+.class-column{
+  width: 40px;
+}
+
+.issued-at-column {
+  width: 75px;
+}
