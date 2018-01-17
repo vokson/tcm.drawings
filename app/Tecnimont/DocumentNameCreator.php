@@ -52,11 +52,10 @@ class DocumentNameCreator
     public function makeRevisionWithR($rev)
     {
         switch ($rev) {
-            case 'A1': return 'A1R';
-            case 'B1': return 'B1R';
+            case 'A1': return 'AR1';
+            case 'B1': return 'BR1';
             case 'SD': return 'SDR';
             case 'VD': return 'VDR';
-            case 'B1': return 'B1R';
             default : return intval($rev) . 'R1';
         }
     }
