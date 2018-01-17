@@ -83,8 +83,8 @@ class DocumentNameCreator
         $max = (intdiv($number, 100) + 1) * 100;
 
         if ($number % 100 == 0) {
-            dec($min);
-            dec($max);
+            $min--;
+            $max--;
         }
 
 //        echo "MIN = " . $min . '<br/>';
