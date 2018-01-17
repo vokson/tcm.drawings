@@ -109,7 +109,7 @@
     module.exports = {
         data: function () {
             return {
-                toggle: "1",
+                toggle: "0",
                 checkedItems: [
                     'nipigaz_code',
                     'tcm_code',
