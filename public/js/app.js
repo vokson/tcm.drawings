@@ -50583,7 +50583,8 @@ module.exports = {
 
 
         if (state.isSearching == true) {
-            commit("setProperty", { property: "information", value: 'Дождитесь результатов предыдущего запроса. Если зависло, обновите страницу..' });
+            commit("setProperty", { property: "information",
+                value: 'Дождитесь результатов предыдущего запроса. Если зависло, обновите страницу..' });
             return;
         }
 
@@ -50720,7 +50721,7 @@ module.exports = new Vuex.Store({
         date_end: '',
         transmittal: '',
 
-        only_last_rev: 1,
+        only_last_rev: 0,
         sortedByItem: "nipigaz_code",
         typeOfFiles: 'pdf',
         information: '',
