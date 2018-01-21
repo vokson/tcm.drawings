@@ -23,7 +23,7 @@ module.exports = new Vuex.Store({
         only_last_rev: 0,
         sortedByItem: "nipigaz_code",
         typeOfFiles: 'pdf',
-        information: '',
+        information: 'Чего ждем? Начинаем вводить текст в окошки и нажимаем Enter.',
         countOfJson: 0,
         isSearching: false,
 
