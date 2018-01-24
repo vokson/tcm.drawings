@@ -31,14 +31,14 @@ module.exports = new Vuex.Store({
 
         itemsToBeShown: [
             'nipigaz_code',
-            'tcm_code',
+            // 'tcm_code',
             'transmittal',
             'issued_at',
             'revision',
-            'class',
-            'reason',
+            // 'class',
+            // 'reason',
             'english_title',
-            'russian_title'
+            // 'russian_title'
         ],
 
 
