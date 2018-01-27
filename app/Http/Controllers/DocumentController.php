@@ -63,7 +63,7 @@ class DocumentController extends Controller
         $docNameCreator = new DocumentNameCreator();
 
         return response()
-            ->make(file_get_contents($docNameCreator->path($doc) . $doc->pdf_file), 200)
+            ->make(file_get_contents($docNameCreator->absolutePath($doc) . $doc->pdf_file), 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="' . $doc->pdf_file . '"');
     }
@@ -73,7 +73,7 @@ class DocumentController extends Controller
         $doc = self::getDocumentById($id);
         $docNameCreator = new DocumentNameCreator();
 
-        return response()->download($docNameCreator->path($doc) . $doc->native_file,
+        return response()->download($docNameCreator->absolutePath($doc) . $doc->native_file,
             $doc->native_file, ['Content-Type: application/octet-stream']);
     }
 
@@ -101,13 +101,13 @@ class DocumentController extends Controller
 
             if ($request->input('typeOfFiles') == "pdf") {
                 if ($doc->pdf_file != '') {
-                    $files[] = $docNameCreator->path($doc) . $doc->pdf_file;
+                    $files[] = $docNameCreator->absolutePath($doc) . $doc->pdf_file;
                 }
             }
 
             if ($request->input('typeOfFiles') == "native") {
                 if ($doc->native_file != '') {
-                    $files[] = $docNameCreator->path($doc) . $doc->native_file;
+                    $files[] = $docNameCreator->absolutePath($doc) . $doc->native_file;
                 }
             }
         }
@@ -120,4 +120,5 @@ class DocumentController extends Controller
             return "";
         }
     }
+
 }

@@ -8,7 +8,7 @@ class File
     {
         $nameCreator = new DocumentNameCreator();
 
-        $path = $nameCreator->path($doc);
+        $path = $nameCreator->absolutePath($doc);
         $name = $nameCreator->nameWithRevision($doc);
 
         $extExpression = '{' . implode(',', $extensions) . '}';

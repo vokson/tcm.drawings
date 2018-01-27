@@ -4,10 +4,25 @@ namespace App\Tecnimont;
 
 class DocumentNameCreator
 {
-    public function path($doc)
+    public function absolutePath($doc)
     {
         $path = config('filesystems.documentStoragePath') . DIRECTORY_SEPARATOR;
         $path .= $this->getProjectFromTcmNumber($doc->tcm_code) . DIRECTORY_SEPARATOR;
+
+        $path .= $this->getDirectionOfTransmittal($doc->transmittal->name) . DIRECTORY_SEPARATOR;
+
+        $transNumber = $this->getNumberOfTransmittal($doc->transmittal->name);
+        $path .= $this->createFolderByNumber($transNumber) . DIRECTORY_SEPARATOR;
+
+        $path .= $doc->transmittal->name . DIRECTORY_SEPARATOR;
+
+        return $path;
+    }
+
+    public function relativePath($doc)
+    {
+//        $path = config('filesystems.documentStoragePath') . DIRECTORY_SEPARATOR;
+        $path = $this->getProjectFromTcmNumber($doc->tcm_code) . DIRECTORY_SEPARATOR;
 
         $path .= $this->getDirectionOfTransmittal($doc->transmittal->name) . DIRECTORY_SEPARATOR;
 

@@ -74,7 +74,10 @@
 
             <tr v-for="item in items">
                 <td v-if="showIssuedAt" class="issued-at-column">{{ rusDateFormat(item.issued_at) }}</td>
-                <td v-if="showTransmittal" class="transmittal-column">{{ item.transmittal }}</td>
+                <td v-if="showTransmittal" class="transmittal-column">
+                    <!--{{ item.transmittal }}-->
+                    <a :href="'/transmittals/' + item.trans_id">{{ item.transmittal }}</a>
+                </td>
 
                 <td v-if="showNipigazCode" class="nipigaz-code-column" scope="row">
                     <div v-if="(item.pdf_file === '')">

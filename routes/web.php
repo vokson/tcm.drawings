@@ -16,6 +16,9 @@ Route::view('/', 'main');
 Route::get('/docs/{id}/pdf', 'DocumentController@getSinglePdfFile');
 Route::get('/docs/{id}/native', 'DocumentController@getSingleNativeFile');
 
+Route::get('/transmittals/{id}', 'TransmittalController@showTransmittalFolder');
+Route::get('/transmittals/{trans_id}/files/{file_id}', 'TransmittalController@getFileFromFolder');
+
 //Route::view('/service', 'service');
 //Route::get('/service', 'ServiceController@index')->name('home');
 

@@ -11,6 +11,7 @@ module.exports = {
         commit("setProperty", {property: "isSearching", value: true});
 
         // dateString in "DD.MM.YYYY' format
+        // dateString in "DD.MM.YYYY' format
         var convertToTimestamp = function (dateString) {
 
             let dmY = dateString.split('.');
