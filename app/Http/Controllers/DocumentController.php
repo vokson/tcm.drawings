@@ -112,6 +112,7 @@ class DocumentController extends Controller
             }
         }
 
+
         $zipPath = config('filesystems.archiveStoragePath') . DIRECTORY_SEPARATOR . 'drawings_' . uniqid() . '.zip';
 
         if ($zipStorage->createArchive($files, $zipPath) === TRUE) {

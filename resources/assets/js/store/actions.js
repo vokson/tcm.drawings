@@ -69,8 +69,12 @@ module.exports = {
             typeOfFiles: state.typeOfFiles,
         })
             .then(function (response) {
-                commit("setProperty", {property: "information", value: 'Архив '+ response.data + ' готов.'});
-                window.location.href = 'storage/zip/' + response.data;
+                if (response.data !== "") {
+                    commit("setProperty", {property: "information", value: 'Архив ' + response.data + ' готов.'});
+                    window.location.href = 'storage/zip/' + response.data;
+                } else {
+                    commit("setProperty", {property: "information", value: 'Не удалось создать архив !!!'});
+                }
             })
             .catch(function (error) {
                 commit("setProperty", {property: "information", value: error});
