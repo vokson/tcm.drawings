@@ -16,6 +16,7 @@ class DocumentNameCreator
 
         $path .= $doc->transmittal->name . DIRECTORY_SEPARATOR;
 
+//        echo $path . "<br/>";
         return $path;
     }
 
@@ -67,11 +68,16 @@ class DocumentNameCreator
     public function makeRevisionWithR($rev)
     {
         switch ($rev) {
-            case 'A1': return 'AR1';
-            case 'B1': return 'BR1';
-            case 'SD': return 'SDR';
-            case 'VD': return 'VDR';
-            default : return intval($rev) . 'R1';
+            case 'A1':
+                return 'AR1';
+            case 'B1':
+                return 'BR1';
+            case 'SD':
+                return 'SDR';
+            case 'VD':
+                return 'VDR';
+            default :
+                return intval($rev) . 'R1';
         }
     }
 
@@ -97,8 +103,8 @@ class DocumentNameCreator
         $max = (intdiv($number, 100) + 1) * 100;
 
         if ($number % 100 == 0) {
-            $min--;
-            $max--;
+            $min = $min - 100;
+            $max = $max - 100;
         }
 
 //        echo "MIN = " . $min . '<br/>';
