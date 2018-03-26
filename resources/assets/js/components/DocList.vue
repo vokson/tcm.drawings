@@ -114,6 +114,11 @@
     module.exports = {
         name: 'DocList',
 
+        mounted: function () {
+            this.$store.dispatch('getCookie');
+            this.search();
+        },
+
         methods: {
             setOrderBy: function (event) {
                 if (event) {

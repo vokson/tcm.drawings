@@ -12,6 +12,12 @@
             }
         },
 
+        computed: {
+            stateValue() {
+                return this.$store.state.nipigaz_code;
+            },
+        },
+
         watch: {
             // whenever value changes, this function will run
             value: function (newValue) {
@@ -22,6 +28,10 @@
                 }
 
                 this.$store.commit("setProperty", payload);
+            },
+
+            stateValue: function (newValue) {
+                this.value = newValue;
             }
         },
 

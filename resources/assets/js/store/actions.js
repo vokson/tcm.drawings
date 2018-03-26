@@ -1,6 +1,53 @@
+var Cookies = require('js-cookie');
+
 module.exports = {
 
-    search: ({commit, state}) => {
+    setCookie: ({state}) => {
+        Cookies.set('nipigaz_code', state.nipigaz_code, { expires: 1 });
+        Cookies.set('tcm_code', state.tcm_code, { expires: 1 });
+        Cookies.set('revision', state.revision, { expires: 1 });
+        Cookies.set('class', state.class, { expires: 1 });
+        Cookies.set('reason', state.reason, { expires: 1 });
+        Cookies.set('english_title', state.english_title, { expires: 1 });
+        Cookies.set('russian_title', state.russian_title, { expires: 1 });
+        Cookies.set('date_beg', state.date_beg, { expires: 1 });
+        Cookies.set('date_end', state.date_end , { expires: 1 });
+        Cookies.set('transmittal', state.transmittal, { expires: 1 });
+        Cookies.set('only_last_rev', state.only_last_rev, { expires: 1 });
+    },
+
+    getCookie: ({commit}) => {
+        let names = [
+            'nipigaz_code',
+            'tcm_code',
+            'revision',
+            'class',
+            'reason',
+            'english_title',
+            'russian_title',
+            'date_beg',
+            'date_end',
+            'transmittal',
+            'only_last_rev'
+        ];
+
+        names.forEach(function(e) {
+            let value = Cookies.get(e);
+
+            if (typeof value === 'undefined') {
+                value = '';
+            }
+
+            commit("setProperty",{property: e, value: value});
+        });
+
+        console.log('getCookie');
+
+    },
+
+    search: ({commit, state, dispatch}) => {
+
+        dispatch('setCookie');
 
         if (state.isSearching == true) {
             commit("setProperty", {property: "information",
@@ -41,6 +88,7 @@ module.exports = {
                 commit('setItems', response.data);
                 commit("setProperty", {property: "isSearching", value: false});
                 commit("setProperty", {property: "information", value: 'Найдено файлов: ' + response.data.length + 'шт.'});
+
             })
             .catch(function (error) {
                 commit("setProperty", {property: "isSearching", value: false});

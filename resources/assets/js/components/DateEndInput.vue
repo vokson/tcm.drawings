@@ -42,6 +42,12 @@
             }
         },
 
+        computed: {
+            stateValue() {
+                return this.$store.state.date_end;
+            },
+        },
+
         watch: {
             // whenever value changes, this function will run
             value: function (newValue) {
@@ -52,6 +58,10 @@
                 if (!this.hasError) {value = newValue};
 
                 this.$store.commit("setProperty", {property: "date_end", value: value});
+            },
+
+            stateValue: function (newValue) {
+                this.value = newValue;
             }
         },
 
