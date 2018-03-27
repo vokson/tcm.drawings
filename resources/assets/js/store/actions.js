@@ -3,17 +3,17 @@ var Cookies = require('js-cookie');
 module.exports = {
 
     setCookie: ({state}) => {
-        Cookies.set('nipigaz_code', state.nipigaz_code, { expires: 1 });
-        Cookies.set('tcm_code', state.tcm_code, { expires: 1 });
-        Cookies.set('revision', state.revision, { expires: 1 });
-        Cookies.set('class', state.class, { expires: 1 });
-        Cookies.set('reason', state.reason, { expires: 1 });
-        Cookies.set('english_title', state.english_title, { expires: 1 });
-        Cookies.set('russian_title', state.russian_title, { expires: 1 });
-        Cookies.set('date_beg', state.date_beg, { expires: 1 });
-        Cookies.set('date_end', state.date_end , { expires: 1 });
-        Cookies.set('transmittal', state.transmittal, { expires: 1 });
-        Cookies.set('only_last_rev', state.only_last_rev, { expires: 1 });
+        Cookies.set('nipigaz_code', state.nipigaz_code, {expires: 1});
+        Cookies.set('tcm_code', state.tcm_code, {expires: 1});
+        Cookies.set('revision', state.revision, {expires: 1});
+        Cookies.set('class', state.class, {expires: 1});
+        Cookies.set('reason', state.reason, {expires: 1});
+        Cookies.set('english_title', state.english_title, {expires: 1});
+        Cookies.set('russian_title', state.russian_title, {expires: 1});
+        Cookies.set('date_beg', state.date_beg, {expires: 1});
+        Cookies.set('date_end', state.date_end, {expires: 1});
+        Cookies.set('transmittal', state.transmittal, {expires: 1});
+        Cookies.set('only_last_rev', state.only_last_rev, {expires: 1});
     },
 
     getCookie: ({commit}) => {
@@ -31,27 +31,54 @@ module.exports = {
             'only_last_rev'
         ];
 
-        names.forEach(function(e) {
+        names.forEach(function (e) {
             let value = Cookies.get(e);
 
             if (typeof value === 'undefined') {
                 value = '';
             }
 
-            commit("setProperty",{property: e, value: value});
+            commit("setProperty", {property: e, value: value});
         });
-
-        console.log('getCookie');
 
     },
 
     search: ({commit, state, dispatch}) => {
 
+        function isEmptyQuery() {
+            if (
+                state.nipigaz_code === "" &&
+                state.tcm_code === "" &&
+                state.revision === "" &&
+                state.class === "" &&
+                state.reason === "" &&
+                state.english_title === "" &&
+                state.russian_title === "" &&
+                state.date_beg === "" &&
+                state.date_end === "" &&
+                state.transmittal === ""
+            ) {
+                return true;
+            }
+            return false;
+        }
+
         dispatch('setCookie');
 
+
         if (state.isSearching == true) {
-            commit("setProperty", {property: "information",
-                value: 'Дождитесь результатов предыдущего запроса. Если зависло, обновите страницу..'});
+            commit("setProperty", {
+                property: "information",
+                value: 'Дождитесь результатов предыдущего запроса. Если зависло, обновите страницу..'
+            });
+            return;
+        }
+
+        if (isEmptyQuery()) {
+            commit("setProperty", {
+                property: "information",
+                value: 'Пустой запрос !! Введите что-нибудь..'
+            });
             return;
         }
 
@@ -87,7 +114,10 @@ module.exports = {
             .then(function (response) {
                 commit('setItems', response.data);
                 commit("setProperty", {property: "isSearching", value: false});
-                commit("setProperty", {property: "information", value: 'Найдено файлов: ' + response.data.length + 'шт.'});
+                commit("setProperty", {
+                    property: "information",
+                    value: 'Найдено файлов: ' + response.data.length + 'шт.'
+                });
 
             })
             .catch(function (error) {
@@ -132,8 +162,7 @@ module.exports = {
 
     getCountOfJson: ({commit, state}) => {
 
-        axios.post('/api/json_count', {
-        })
+        axios.post('/api/json_count', {})
             .then(function (response) {
                 commit("setProperty", {property: "countOfJson", value: response.data});
             })
