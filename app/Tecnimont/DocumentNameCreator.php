@@ -35,6 +35,7 @@ class DocumentNameCreator
         return $path;
     }
 
+    // TODO - Надо здесь добавить TCM-NKK
     public function nameWithRevision($doc)
     {
         return $name = $doc->nipigaz_code . '_' . $this->cleanRevisionFromR($doc->revision);
