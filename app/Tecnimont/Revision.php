@@ -32,10 +32,16 @@ class Revision
         'VD' => 24
     ];
 
-    public static function max($rev1, $rev2)
+    public static function max($doc, $rev1, $rev2)
     {
+        if ($rev1 == "AE") {
+            var_dump($doc);
+        }
+
         $i1 = self::$revGrow[$rev1];
         $i2 = self::$revGrow[$rev2];
+
+
 
         return ($i1 > $i2) ? $rev1 : $rev2;
     }

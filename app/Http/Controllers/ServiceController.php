@@ -31,6 +31,8 @@ class ServiceController extends Controller
 
     public function maxRevUpdate()
     {
+        set_time_limit(300);
+
         DB::table('max_revs')->truncate();
 
         $docs = Doc::all();
@@ -41,8 +43,11 @@ class ServiceController extends Controller
         foreach ($docs as $doc) {
             if (isset($revArray[$doc->nipigaz_code])) {
 
+
+
+
                 $revArray[$doc->nipigaz_code] =
-                    Revision::max($nameCreator->cleanRevisionFromR($doc->revision), $revArray[$doc->nipigaz_code]);
+                    Revision::max($doc->id, $nameCreator->cleanRevisionFromR($doc->revision), $revArray[$doc->nipigaz_code]);
 
             } else {
                 $revArray[$doc->nipigaz_code] = $nameCreator->cleanRevisionFromR($doc->revision);
@@ -61,6 +66,6 @@ class ServiceController extends Controller
             $doc->save();
         }
 
-        echo count($revArray) . " maximum revisions have been chosen.";
-    }
+echo count($revArray) . " maximum revisions have been chosen.";
+}
 }

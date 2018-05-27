@@ -62,6 +62,8 @@ class DocumentNameCreator
             $rev = substr($rev, 0, 2);
         }
 
+
+
         return $rev;
     }
 
