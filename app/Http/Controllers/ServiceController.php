@@ -14,6 +14,11 @@ use App\Tecnimont\Revision;
 class ServiceController extends Controller
 {
 
+    public function getDatabaseBackup()
+    {
+        return response()->file(database_path('database.sqlite'));
+    }
+
     public function importAllJson()
     {
         $files = Storage::files(config('filesystems.jsonFolder'));

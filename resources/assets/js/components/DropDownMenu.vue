@@ -43,6 +43,11 @@
                                 <span class="badge badge-pill badge-warning">{{jsonCount}}</span>
                             </a>
 
+                            <a v-on:click="databaseBackup" class="dropdown-item" href="#">
+                                <span class="badge badge-pill badge-danger">НЕ ТРОГАТЬ</span>
+                                Резервная копия базы данных
+                            </a>
+
                             <div class="dropdown-divider"></div>
 
                             <div class="form-check">
@@ -140,6 +145,10 @@
 
             importJson: function (event) {
                 window.location.href = '/service/import_json';
+            },
+
+            databaseBackup: function (event) {
+                window.location.href = '/service/database_backup';
             },
 
         },

@@ -24,6 +24,7 @@ Route::get('/transmittals/{trans_id}/files/{file_id}', 'TransmittalController@ge
 
 Route::get('/service/max_rev', 'ServiceController@maxRevUpdate');
 Route::get('/service/import_json', 'ServiceController@importAllJson');
+Route::get('/service/database_backup', 'ServiceController@getDatabaseBackup');
 
 
 //Auth::routes();
