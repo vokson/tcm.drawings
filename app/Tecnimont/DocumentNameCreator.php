@@ -35,9 +35,22 @@ class DocumentNameCreator
         return $path;
     }
 
+    // TODO - Надо здесь добавить TCM-NKK
+
+
     public function nameWithRevision($doc)
     {
-        return $name = $doc->nipigaz_code . '_' . $this->cleanRevisionFromR($doc->revision);
+        // Адаптируем nipigaz_code для имени файла
+        $code = $doc->nipigaz_code;
+        $left = substr($code, 0,5);
+        $right = substr($code, 5);
+
+        // Ищем последнюю точку в правой части
+        $pos = strrpos($right, '.');
+        // Меняем последнюю точку на тире
+        $right[$pos] = '-';
+
+        return $name = $left . 'TCM-NKK-' . $right . '_' . $this->cleanRevisionFromR($doc->revision);
     }
 
     protected function language()
