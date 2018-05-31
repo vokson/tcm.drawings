@@ -48,6 +48,10 @@
             },
         },
 
+        mounted: function () {
+            this.value = this.stateValue;
+        },
+
         watch: {
             // whenever value changes, this function will run
             value: function (newValue) {
