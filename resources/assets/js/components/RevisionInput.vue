@@ -12,6 +12,10 @@
             }
         },
 
+        mounted: function () {
+            this.value = this.stateValue;
+        },
+
         computed: {
             stateValue() {
                 return this.$store.state.revision;
