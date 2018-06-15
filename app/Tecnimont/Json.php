@@ -44,8 +44,15 @@ class Json
 
 
                 if ($assocArray['IS_REPLY_REQUESTED'] == "YES") {
-                    $trans->reply_by = Carbon::createFromFormat('d.m.Y H:i:s',
-                        $assocArray['REPLY_BY'] . ' 00:00:00', 'UTC')->timestamp;
+
+                    try {
+                        $trans->reply_by = Carbon::createFromFormat('d.m.Y H:i:s',
+                            $assocArray['REPLY_BY'] . ' 00:00:00', 'UTC')->timestamp;
+                    } catch (\Exception $err) {
+                        $trans->reply_by = Carbon::createFromFormat('d.m.Y H:i:s',
+                            '01.01.1900 00:00:00', 'UTC')->timestamp;
+                    }
+
                 }
 
                 $trans->save();
