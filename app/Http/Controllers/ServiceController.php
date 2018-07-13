@@ -10,13 +10,14 @@ use App\MaxRev;
 use App\Tecnimont\DocumentNameCreator;
 use Illuminate\Support\Facades\DB;
 use App\Tecnimont\Revision;
+use Carbon\Carbon;
 
 class ServiceController extends Controller
 {
 
     public function getDatabaseBackup()
     {
-        return response()->file(database_path('database.sqlite'));
+        return response()->download(database_path('database.sqlite'), Carbon::now()->toDateTimeString() . ".sqlite");
     }
 
     public function importAllJson()
