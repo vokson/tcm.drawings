@@ -112,6 +112,15 @@
 
 <script>
     module.exports = {
+
+        beforeCreate: function () {
+            this.$store.dispatch('getCookie');
+        },
+
+        created: function () {
+            this.toggle = this.$store.state.only_last_rev;
+        },
+
         data: function () {
             return {
                 toggle: "0",

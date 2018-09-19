@@ -115,7 +115,6 @@
         name: 'DocList',
 
         mounted: function () {
-            this.$store.dispatch('getCookie');
             this.search();
         },
 
