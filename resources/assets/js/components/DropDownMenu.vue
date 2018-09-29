@@ -2,6 +2,7 @@
     <div class="header">
         <table class="table">
             <tr>
+
                 <td class="menu-cell">
                     <div class="dropright">
 
@@ -98,6 +99,12 @@
 
                     </div>
                 </td>
+
+                <td>
+                    <img src="../../img/clean.png" width="35" height="35" v-on:click="clean" title="Очистить / Clean">
+                </td>
+
+
                 <td>
 
                     <div class="info-label"> {{ info }} </div>
@@ -146,6 +153,10 @@
 
             search: function (event) {
                 this.$store.dispatch('search');
+            },
+
+            clean: function (event) {
+                this.$store.commit('cleanSearch');
             },
 
             maxRevUpdate: function (event) {
