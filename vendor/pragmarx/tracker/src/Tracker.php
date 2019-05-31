@@ -4,14 +4,14 @@ namespace PragmaRX\Tracker;
 
 use Illuminate\Foundation\Application as Laravel;
 use Illuminate\Http\Request;
-use Illuminate\Log\Writer as Logger;
 use Illuminate\Routing\Router;
 use PragmaRX\Support\Config;
+use PragmaRX\Support\GeoIp\Updater as GeoIpUpdater;
 use PragmaRX\Support\IpAddress;
 use PragmaRX\Tracker\Data\RepositoryManager as DataRepositoryManager;
-use PragmaRX\Tracker\Support\Minutes;
-use PragmaRX\Support\GeoIp\Updater as GeoIpUpdater;
 use PragmaRX\Tracker\Repositories\Message as MessageRepository;
+use PragmaRX\Tracker\Support\Minutes;
+use Psr\Log\LoggerInterface;
 
 class Tracker
 {
@@ -45,7 +45,7 @@ class Tracker
         DataRepositoryManager $dataRepositoryManager,
         Request $request,
         Router $route,
-        Logger $logger,
+        LoggerInterface $logger,
         Laravel $laravel,
         MessageRepository $messageRepository
     ) {

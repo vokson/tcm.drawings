@@ -31,6 +31,7 @@ use PragmaRX\Tracker\Data\Repositories\SqlQueryLog;
 use PragmaRX\Tracker\Data\Repositories\SystemClass;
 use PragmaRX\Tracker\Data\RepositoryManager;
 use PragmaRX\Tracker\Eventing\EventStorage;
+use PragmaRX\Tracker\Repositories\Message as MessageRepository;
 use PragmaRX\Tracker\Services\Authentication;
 use PragmaRX\Tracker\Support\Cache;
 use PragmaRX\Tracker\Support\CrawlerDetector;
@@ -41,7 +42,6 @@ use PragmaRX\Tracker\Support\UserAgentParser;
 use PragmaRX\Tracker\Tracker;
 use PragmaRX\Tracker\Vendor\Laravel\Artisan\Tables as TablesCommand;
 use PragmaRX\Tracker\Vendor\Laravel\Artisan\UpdateGeoIp;
-use PragmaRX\Tracker\Repositories\Message as MessageRepository;
 
 class ServiceProvider extends PragmaRXServiceProvider
 {
@@ -50,6 +50,8 @@ class ServiceProvider extends PragmaRXServiceProvider
     protected $packageName = 'tracker';
 
     protected $packageNameCapitalized = 'Tracker';
+
+    protected $repositoryManagerIsBooted = false;
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -84,6 +86,16 @@ class ServiceProvider extends PragmaRXServiceProvider
         }
 
         $this->loadTranslations();
+    }
+
+    /**
+     * Check if the service provider is full booted.
+     *
+     * @return void
+     */
+    public function isFullyBooted()
+    {
+        return $this->repositoryManagerIsBooted;
     }
 
     /**
@@ -259,7 +271,7 @@ class ServiceProvider extends PragmaRXServiceProvider
                 $app['request']->server('HTTP_USER_AGENT')
             );
 
-            return new RepositoryManager(
+            $manager = new RepositoryManager(
                 new GeoIp($this->getConfig('geoip_database_path')),
 
                 new MobileDetect(),
@@ -334,6 +346,10 @@ class ServiceProvider extends PragmaRXServiceProvider
 
                 new LanguageDetect()
             );
+
+            $this->repositoryManagerIsBooted = true;
+
+            return $manager;
         });
     }
 
@@ -473,7 +489,7 @@ class ServiceProvider extends PragmaRXServiceProvider
         });
 
         $this->app['events']->listen('*', function ($object = null) use ($me) {
-            if ($me->app['tracker.events']->isOff()) {
+            if ($me->app['tracker.events']->isOff() || !$me->isFullyBooted()) {
                 return;
             }
 
